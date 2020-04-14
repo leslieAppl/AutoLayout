@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     
     var grayView: UIView!
     var greenView: UIView!
-    var counterX: CGFloat = -40.0
+    var counterX: CGFloat = 0
     var counterY: CGFloat = 0.0
     
     override func viewDidLoad() {
@@ -44,8 +44,6 @@ class ViewController: UIViewController {
         //Adding constraints with the isActive property
         initGreenView()
         
-        //Updating Anchors
-        initButton3()
     }
 
     //MARK: - Removing Constraints
@@ -169,94 +167,11 @@ class ViewController: UIViewController {
         view.addSubview(greenView)
         
         //Manually Resizing
-        greenView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        greenView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80).isActive = true
         greenView.topAnchor.constraint(equalTo: view.topAnchor, constant: 250).isActive = true
         greenView.widthAnchor.constraint(equalToConstant: 50).isActive = true
         greenView.heightAnchor.constraint(equalToConstant: 50).isActive = true
 
     }
-    
-    //MARK: - Updating Anchors
-    func initButton3() {
-        button3 = UIButton(type: .system)
-        //Auto resized by button's intrinsic content size(button3.text size)
-        button3.setTitle("move green view", for: .normal)
-        button3.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        button3.backgroundColor = .green
-        button3.translatesAutoresizingMaskIntoConstraints = false
-        button3.addTarget(self, action: #selector(self.moveGreenView), for: .touchUpInside)
-        view.addSubview(button3)
-        
-        button3.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
-        button3.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 50).isActive = true
-//        button3.widthAnchor.constraint(equalToConstant: 50).isActive = true
-//        button3.heightAnchor.constraint(equalToConstant: 50).isActive = true
-
-    }
-    
-    @objc func moveGreenView() {
-        //x: 375, y: 667
-//        counterX = grayView.frame.size.width
-//        counterY = grayView.frame.size.height
-//        counterX = view.frame.size.width - greenView.frame.size.width
-        
-//        if counterX > 0 {
-        
-        if counterX <= -400 {
-            greenView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: counterX).isActive = true
-            counterX = -20
-
-        } else if counterX > -400 {
-            
-            greenView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: counterX).isActive = true
-            
-            counterX -= 20
-            print(counterX)
-        }
-//        }
-        
-                    
-
-
-//        if counterX < (view.frame.size.width - grayView.frame.size.width) {
-//
-//            grayView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: counterX + 1).isActive = true
-//
-//            counterX += 1
-//
-//        } else if counterX == (view.frame.size.width - grayView.frame.size.width){
-//
-//            if counterY < (view.frame.size.height - grayView.frame.size.height) {
-//
-//                grayView.topAnchor.constraint(equalTo: view.topAnchor, constant: counterY + 1).isActive = true
-//
-//                counterY += 1
-//
-//            } else if counterY == (view.frame.size.height - grayView.frame.size.height) {
-//
-//                grayView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: counterX - 1).isActive = true
-//
-//                counterX -= 1
-//
-//            }
-//        } else if counterX == 0.0 {
-//            if counterY < (view.frame.size.height - grayView.frame.size.height) {
-//
-//                grayView.topAnchor.constraint(equalTo: view.topAnchor, constant: counterY - 1).isActive = true
-//
-//                counterY -= 1
-//
-//            } else if counterY == (view.frame.size.height - grayView.frame.size.height) {
-//
-//                grayView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: counterX + 1).isActive = true
-//
-//                counterX += 1
-//
-//            }
-//
-//        }
-    }
-
-
 }
 
