@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     var myLabel: UILabel!
     var button: UIButton!
     var button2: UIButton!
+    var button3: UIButton!
     
     var constraintLeft: NSLayoutConstraint!
     var constraintRight: NSLayoutConstraint!
@@ -20,6 +21,11 @@ class ViewController: UIViewController {
     
     var constraintWidth: NSLayoutConstraint!
     var constraintHeight: NSLayoutConstraint!
+    
+    var grayView: UIView!
+    var greenView: UIView!
+    var counterX: CGFloat = -40.0
+    var counterY: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +37,15 @@ class ViewController: UIViewController {
         
         //Updating Constraints
         initButton2()
+        
+        //Attaching constraints to the view's anchors
+        initGrayView()
+        
+        //Adding constraints with the isActive property
+        initGreenView()
+        
+        //Updating Anchors
+        initButton3()
     }
 
     //MARK: - Removing Constraints
@@ -127,5 +142,121 @@ class ViewController: UIViewController {
             constraintHeight.constant = 50
         }
     }
+    
+    //MARK: - Attaching constraints to the view's anchors
+    func initGrayView() {
+        //Auto Resizing
+        grayView = UIView(frame: CGRect.zero)
+        grayView.backgroundColor = .gray
+        grayView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(grayView)
+        
+        //Manually Resizing
+        let constraint1 = grayView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+        let constraint2 = grayView.topAnchor.constraint(equalTo: view.topAnchor, constant: 250)
+        let constraint3 = grayView.widthAnchor.constraint(equalToConstant: 50)
+        let constraint4 = grayView.heightAnchor.constraint(equalToConstant: 50)
+        
+        view.addConstraints([constraint1, constraint2, constraint3, constraint4])
+    }
+    
+    //MARK: - Adding constraints with the isActive property
+    func initGreenView() {
+        //Auto Resizing
+        greenView = UIView(frame: CGRect.zero)
+        greenView.backgroundColor = .green
+        greenView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(greenView)
+        
+        //Manually Resizing
+        greenView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        greenView.topAnchor.constraint(equalTo: view.topAnchor, constant: 250).isActive = true
+        greenView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        greenView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
+    }
+    
+    //MARK: - Updating Anchors
+    func initButton3() {
+        button3 = UIButton(type: .system)
+        //Auto resized by button's intrinsic content size(button3.text size)
+        button3.setTitle("move green view", for: .normal)
+        button3.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        button3.backgroundColor = .green
+        button3.translatesAutoresizingMaskIntoConstraints = false
+        button3.addTarget(self, action: #selector(self.moveGreenView), for: .touchUpInside)
+        view.addSubview(button3)
+        
+        button3.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        button3.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 50).isActive = true
+//        button3.widthAnchor.constraint(equalToConstant: 50).isActive = true
+//        button3.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
+    }
+    
+    @objc func moveGreenView() {
+        //x: 375, y: 667
+//        counterX = grayView.frame.size.width
+//        counterY = grayView.frame.size.height
+//        counterX = view.frame.size.width - greenView.frame.size.width
+        
+//        if counterX > 0 {
+        
+        if counterX <= -400 {
+            greenView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: counterX).isActive = true
+            counterX = -20
+
+        } else if counterX > -400 {
+            
+            greenView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: counterX).isActive = true
+            
+            counterX -= 20
+            print(counterX)
+        }
+//        }
+        
+                    
+
+
+//        if counterX < (view.frame.size.width - grayView.frame.size.width) {
+//
+//            grayView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: counterX + 1).isActive = true
+//
+//            counterX += 1
+//
+//        } else if counterX == (view.frame.size.width - grayView.frame.size.width){
+//
+//            if counterY < (view.frame.size.height - grayView.frame.size.height) {
+//
+//                grayView.topAnchor.constraint(equalTo: view.topAnchor, constant: counterY + 1).isActive = true
+//
+//                counterY += 1
+//
+//            } else if counterY == (view.frame.size.height - grayView.frame.size.height) {
+//
+//                grayView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: counterX - 1).isActive = true
+//
+//                counterX -= 1
+//
+//            }
+//        } else if counterX == 0.0 {
+//            if counterY < (view.frame.size.height - grayView.frame.size.height) {
+//
+//                grayView.topAnchor.constraint(equalTo: view.topAnchor, constant: counterY - 1).isActive = true
+//
+//                counterY -= 1
+//
+//            } else if counterY == (view.frame.size.height - grayView.frame.size.height) {
+//
+//                grayView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: counterX + 1).isActive = true
+//
+//                counterX += 1
+//
+//            }
+//
+//        }
+    }
+
+
 }
 
