@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         
     }
 
-    //MARK: - Removing Constraints
+    //MARK: - Removing Layout Constraints
     func initLabel() {
         myLabel = UILabel(frame: CGRect.zero)
         myLabel.text = "Center"
@@ -90,7 +90,7 @@ class ViewController: UIViewController {
             break
         }
     }
-    
+
     func configConstraints() {
         
         constraintLeft = NSLayoutConstraint(item: myLabel!, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 20)
@@ -98,8 +98,6 @@ class ViewController: UIViewController {
         constraintRight = NSLayoutConstraint(item: myLabel!, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -20)
         
         constraintCenter = NSLayoutConstraint(item: myLabel!, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
-        
-        
         
     }
     
